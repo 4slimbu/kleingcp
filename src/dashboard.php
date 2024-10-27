@@ -90,12 +90,12 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <option value="celebrity">Celebrity</option>
                     </select>
                 </div>
-                <div class="form-group form-check mb-2">
-                    <input class="form-check-input" type="checkbox" role="switch" id="bell">
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" role="switch" id="bell" name="bell">
                     <label class="form-check-label" for="bell">Bell Notification</label>
                 </div>
-                <div class="form-group form-check mb-2">
-                    <input class="form-check-input" type="checkbox" role="switch" id="status">
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" role="switch" id="status" name="status">
                     <label class="form-check-label" for="status">Active Status</label>
                 </div>
                 <div class="form-group mb-2">
@@ -107,3 +107,16 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const switches = document.querySelectorAll('.form-check-input');
+
+        switches.forEach(switchElement => {
+            switchElement.addEventListener('change', function() {
+                // Just check or uncheck the input
+                console.log(`Checkbox for "${this.dataset.setting}" is now ${this.checked ? 'checked' : 'unchecked'}.`);
+            });
+        });
+    });
+</script>
