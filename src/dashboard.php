@@ -5,19 +5,24 @@ $db = dbConnect();
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitize and store the submitted data
-    $priority = htmlspecialchars($_POST['priority']);
-    $name = htmlspecialchars($_POST['name']);
-    $link = htmlspecialchars($_POST['link']);
-    $bell = isset($_POST['bell']) ? 1 : 0; // Convert to 1 or 0
-    $status = isset($_POST['status']) ? 1 : 0; // Convert to 1 or 0
+    if (isset($_POST['delete'])) {
+        // Handle delete action
+        $id = intval($_POST['delete']);
+        $stmt = $db->prepare("DELETE FROM profiles WHERE id = ?");
+        $stmt->execute([$id]);
+    } else {
+        // Sanitize and store the submitted data
+        $priority = htmlspecialchars($_POST['priority']);
+        $name = htmlspecialchars($_POST['name']);
+        $link = htmlspecialchars($_POST['link']);
+        $bell = isset($_POST['bell']) ? 1 : 0; // Convert to 1 or 0
+        $status = isset($_POST['status']) ? 1 : 0; // Convert to 1 or 0
 
-
-    // Prepare the SQL statement to insert data
-    $stmt = $db->prepare("INSERT INTO profiles (priority, name, link, bell, status) VALUES (?, ?, ?, ?, ?)");
-
-    // Execute the prepared statement
-    $stmt->execute([$priority, $name, $link, $bell, $status]);
+        // Prepare the SQL statement to insert data
+        $stmt = $db->prepare("INSERT INTO profiles (priority, name, link, bell, status) VALUES (?, ?, ?, ?, ?)");
+        // Execute the prepared statement
+        $stmt->execute([$priority, $name, $link, $bell, $status]);
+    }
 }
 
 // Prepare the SQL statement to retrieve data
@@ -39,6 +44,7 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <th>Link</th>
                         <th>Bell</th>
                         <th>Status</th>
+                        <th>Actions</th> <!-- New Actions column -->
                     </tr>
                 </thead>
                 <tbody>
@@ -64,6 +70,12 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" role="switch" id="statusSwitch<?php echo $profile['id']; ?>" <?php echo $profile['status'] ? 'checked' : ''; ?>>
                                 </div>
+                            </td>
+                            <td>
+                                <form method="POST" style="display:inline;">
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(<?php echo $profile['id']; ?>)">Delete</button>
+                                    <input type="hidden" name="delete" value="<?php echo $profile['id']; ?>">
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -105,10 +117,17 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </form>
         </div>
     </div>
-
 </div>
 
 <script>
+    function confirmDelete(id) {
+        if (confirm('Are you sure you want to delete this profile?')) {
+            // Find the form associated with the delete button and submit it
+            const form = document.querySelector(`form input[value="${id}"]`).closest('form');
+            form.submit();
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         const switches = document.querySelectorAll('.form-check-input');
 
@@ -119,4 +138,5 @@ $profiles = $stmt->fetchAll(PDO::FETCH_ASSOC);
             });
         });
     });
+</script>
 </script>
