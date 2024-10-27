@@ -14,3 +14,11 @@ a:focus {
     background-color: #1d805f;
     border-color: #1d805f;
 }
+
+.btn-primary {
+    background-color: #1d805f;
+}
+
+.btn-primary:hover {
+    background-color: #00ab75;
+}
