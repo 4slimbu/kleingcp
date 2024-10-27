@@ -1,0 +1,14 @@
+vendor/
+backups/
+logs/
+error_log
+.env
+.vscode
+storage/orders/
+storage/quotes/
+storage/tmp/
+public_html/images/orders/
+.rgignore
+.htaccess
+.note/
+.notes
