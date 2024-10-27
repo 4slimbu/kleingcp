@@ -1,0 +1,13 @@
+{
+  "name": "Klein App",
+  "version": "0.1.0",
+  "devDependencies": {
+    "browser-sync": "^3.0.2"
+  },
+  "scripts": {
+    "start": "browser-sync start --proxy 'localhost:8080' --files '**/*.css, **/*.js, **/*.php'"
+  },
+  "author": "Sudip Limbu",
+  "license": "ISC"
+}
+

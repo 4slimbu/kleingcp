@@ -1,0 +1,19 @@
+{
+    "name": "4slimbu/klein",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "4slimbu\\Klein\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sudip Limbu"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "symfony/var-dumper": "^5.4",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
