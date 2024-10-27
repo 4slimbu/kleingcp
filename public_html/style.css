@@ -1,51 +1,16 @@
 html,
 body {
-    color: #333 !important;
+    color: #333;
     height: 100%;
 }
 
-header a,
-header a:visited,
-header a:focus {
-    color: #333 !important;
+a,
+a:visited,
+a:focus {
+    color: #1d805f;
 }
 
-.main-wrapper {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.main-content {
-    margin-bottom: 50px !important;
-}
-
-footer {
-    margin-top: auto;
-}
-
-.container-xxxl {
-    width: auto;
-    margin: 0 10%;
-}
-
-.welcome-container {
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.welcome-container h1 {
-    font-size: 4rem;
-    color: #343a40;
-    /* Bootstrap dark color */
-}
-
-.welcome-container p {
-    font-size: 1.5rem;
-    color: #6c757d;
-    /* Bootstrap muted color */
+.form-check-input:checked {
+    background-color: #1d805f;
+    border-color: #1d805f;
 }

@@ -24,6 +24,7 @@ require_once ROOT_DIR . '/src/config.php';
 
 // connect database
 require_once ROOT_DIR . '/src/db.php';
+// dbConnect();
 
 // Routing
 require_once ROOT_DIR . '/src/routes.php';
